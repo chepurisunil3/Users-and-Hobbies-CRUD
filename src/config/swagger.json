@@ -1,0 +1,464 @@
+{
+    "openapi":"3.0.3",
+    "info":{
+        "version":"1.0.0",
+        "title":"Users Hobbies API Documentation",
+        "description":"An easy way to add your daily hoobies and check even after years"
+    },
+    "servers": [{"url": "http://localhost:3000","description": "Local Server"}],
+    "tags": [{
+        "name": "Users",
+        "description": "API requests supported for User Level Data"
+    },
+    {
+        "name": "Hobbies",
+        "description": "API requests supported for Hobbies Level Data"
+    }],
+    "paths": {
+        "/users": {
+            "get":{
+                "tags": ["Users"],
+                "summary": "Get all the users List",
+                "description": "Get the users list with their names and the unique id for other queries",
+                "responses": {
+                    "200":{
+                        "description": "Operation Successfull",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"array",
+                                    "default":[]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post":{
+                "tags": ["Users"],
+                "summary": "Add an User",
+                "description": "Add a new user with minimal fields to create hobbies!",
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#components/schemas/newUser",
+                                "required": ["name"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200":{
+                        "description": "Operation Successfull",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#components/schemas/user"
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description": "Bad Request! Required Details not provided as expected",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "properties": {
+                                        "name":{
+                                            "description": "Top Level error",
+                                            "type": "string"
+                                        },
+                                        "message":{
+                                            "description": "Detailed error",
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{id}":{
+            "get":{
+                "tags": ["Users"],
+                "parameters": [{"in": "path","name": "id","required": true,"schema":{"type": "string"}}],
+                "summary": "Get Specific User",
+                "description": "Get the users details from User ID",
+                "responses": {
+                    "200":{
+                        "description": "Operation Successfull",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#/components/schemas/user"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put":{
+                "tags": ["Users"],
+                "parameters": [{"in": "path","name": "id","required": true,"schema":{"type": "string"}}],
+                "summary": "Update User details",
+                "description": "Update existing user details",
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#components/schemas/newUser",
+                                "required": ["name"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200":{
+                        "description": "Operation Successfull",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#/components/schemas/user"
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description": "Bad Request! Required Details not provided as expected",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "properties": {
+                                        "name":{
+                                            "description": "Top Level error",
+                                            "type": "string"
+                                        },
+                                        "message":{
+                                            "description": "Detailed error",
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete":{
+                "tags": ["Users"],
+                "parameters": [{"in": "path","name": "id","required": true,"schema":{"type": "string"}}],
+                "summary": "Delete an User",
+                "description": "Delete the existing user",
+                "responses": {
+                    "200":{
+                        "description": "Operation Successfull",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "properties":{
+                                        "success":{"type": "boolean"}
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description": "Bad Request! User not Found",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "properties":{
+                                        "success":{"type": "boolean","default":false}
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/hobbies/{userId}": {
+            "get":{
+                "parameters": [{"in": "path","name": "userId","required": true,"schema":{"type": "string"}}],
+                "tags": ["Hobbies"],
+                "summary": "Get all the hobbies of a user",
+                "description": "Get the hobbies list with their details and the unique id for other queries operations",
+                "responses": {
+                    "200":{
+                        "description": "Operation Successfull",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type": "array",
+                                    "default":[]
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description": "Bad Request! Required Details not provided as expected",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "properties": {
+                                        "name":{
+                                            "description": "Top Level error",
+                                            "type": "string"
+                                        },
+                                        "message":{
+                                            "description": "Detailed error",
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post":{
+                "parameters": [{"in": "path","name": "userId","required": true,"schema":{"type": "string"}}],
+                "tags": ["Hobbies"],
+                "summary": "Add a new Hobby",
+                "description": "Add a new hobby with passion Level and remember your memories after years!",
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#components/schemas/newHobbies",
+                                "required": ["name","year","passionLevel"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200":{
+                        "description": "Operation Successfull",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#components/schemas/hobbies"
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description": "Bad Request! Required Details not provided as expected",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "properties": {
+                                        "name":{
+                                            "description": "Top Level error",
+                                            "type": "string"
+                                        },
+                                        "message":{
+                                            "description": "Detailed error",
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/hobbies/{id}":{
+            "put":{
+                "tags": ["Hobbies"],
+                "parameters": [{"in": "path","name": "id","required": true,"schema":{"type": "string"}}],
+                "summary": "Update Hobbies details",
+                "description": "Update existing hobbies details",
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#components/schemas/newHobbies"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200":{
+                        "description": "Operation Successfull",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#/components/schemas/hobbies"
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description": "Bad Request! Required Details not provided as expected",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "properties": {
+                                        "name":{
+                                            "description": "Top Level error",
+                                            "type": "string"
+                                        },
+                                        "message":{
+                                            "description": "Detailed error",
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete":{
+                "tags": ["Hobbies"],
+                "parameters": [{"in": "path","name": "id","required": true,"schema":{"type": "string"}}],
+                "summary": "Delete a Hobby",
+                "description": "Delete a existing Hobby",
+                "responses": {
+                    "200":{
+                        "description": "Operation Successfull",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "properties":{
+                                        "success":{"type": "boolean"}
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description": "Bad Request! User not Found",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "properties":{
+                                        "success":{"type": "boolean","default":false}
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/hobbies/hobby/{id}":{
+            "get":{
+                "tags": ["Hobbies"],
+                "parameters": [{"in": "path","name": "id","required": true,"schema":{"type": "string"}}],
+                "summary": "Get Specific Hobby",
+                "description": "Get the specific hobby details from Id",
+                "responses": {
+                    "200":{
+                        "description": "Operation Successfull",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#/components/schemas/hobbies"
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description": "Bad Request! Required Details not provided as expected",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "properties": {
+                                        "name":{
+                                            "description": "Top Level error",
+                                            "type": "string"
+                                        },
+                                        "message":{
+                                            "description": "Detailed error",
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "user":{
+                "type": "object",
+                "properties": {
+                    "_id":{
+                        "type": "string",
+                        "description": "Unique Id for user operations"
+                    },
+                    "name":{
+                        "type": "string",
+                        "description": "Name of the user"
+                    }
+                }
+            },
+            "newUser":{
+                "type": "object",
+                "properties": {
+                    "name":{
+                        "type": "string",
+                        "description": "Name of the user"
+                    }
+                }
+            },
+            "hobbies":{
+                "type": "object",
+                "properties": {
+                    "_id":{
+                        "type": "string",
+                        "description": "Unique Id for user operations"
+                    },
+                    "passionLevel":{
+                        "type":"string",
+                        "description": "How much interest you have for the hobby ? Passion Levels can be Low, Medium, High and VeryHigh only"
+                    },
+                    "name":{
+                        "type": "string",
+                        "description": "Name of the Hobby"
+                    },
+                    "year":{
+                        "type":"number",
+                        "description": "Year for the hobbies"
+                    }
+                }
+            },
+            "newHobbies":{
+                "type": "object",
+                "properties": {
+                    "passionLevel":{
+                        "type":"string",
+                        "description": "How much interest you have for the hobby ? Passion Levels can be Low, Medium, High and VeryHigh only"
+                    },
+                    "name":{
+                        "type": "string",
+                        "description": "Name of the Hobby"
+                    },
+                    "year":{
+                        "type":"number",
+                        "description": "Year for the hobbies"
+                    }
+                }
+            }
+        }
+    }
+}
