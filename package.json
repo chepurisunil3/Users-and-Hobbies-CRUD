@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --pretty --transpile-only src/server.ts",
     "test": "jest",
-    "swagger": "tsoa spec"
+    "swagger": "tsoa spec",
+    "build":"tsc"
   },
   "repository": {
     "type": "git",
