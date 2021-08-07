@@ -34,14 +34,14 @@ export const findHobbyWithId = async (id:string): Promise<IHobbies|IError> => {
 
 export const addHobbyForUser = async (userId:string,hobby:IHobbies): Promise<IHobbies|IError> => {
     try {
-        if (await User.findById(userId))
+        if (await User.findById(userId) != null)
         {
             const hobbiesToSave:IHobbies = new Hobbies(hobby);
             const err = hobbiesToSave.validateSync();
             err instanceof mongoose.Error;
             if(err)
             {
-                const messageToShow:string = err.message.split(":")[1]?.replaceAll("enum","value");
+                const messageToShow:string = err.message;
                 const error:IError = {name:err.name,message:messageToShow};
                 return error;
             }
@@ -57,7 +57,7 @@ export const addHobbyForUser = async (userId:string,hobby:IHobbies): Promise<IHo
     }
     catch(exception)
     {
-        const error:IError = {name:"Not Found!",message:"The user is not found"};
+        const error:IError = {name:exception.name,message:exception.message};
         return error;
     }
 }

@@ -20,7 +20,7 @@ export const addUser = async (user:IUser): Promise<IUser|IError> => {
         err instanceof mongoose.Error;
         if(err)
         {
-            const messageToShow:string = err.message.split(":")[1]?.replaceAll("enum","value");
+            const messageToShow:string = err.message;
             const error:IError = {name:err.name,message:messageToShow};
             return error;
         }
@@ -30,7 +30,7 @@ export const addUser = async (user:IUser): Promise<IUser|IError> => {
     }
     catch(exception)
     {
-        const messageToShow:string = exception.message.split(":")[1]?.replaceAll("enum","value");
+        const messageToShow:string = exception.message;
         const error:IError = {name:exception.name,message:messageToShow};
         return error;
     }
@@ -54,7 +54,7 @@ export const updateUser = async (id:string,user:IUser): Promise<IUser|IError> =>
     catch(exception)
     {
         console.log(exception)
-        const messageToShow:string = exception.message.split(":")[1]?.replaceAll("enum","value");
+        const messageToShow:string = exception.message;
         const error:IError = {name:exception.name,message:messageToShow};
         return error;
     }

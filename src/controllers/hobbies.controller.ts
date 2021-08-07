@@ -34,7 +34,7 @@ export const addNewHobby = async (req: Request,res: Response,next: NextFunction)
         return res.status(200).json(newHobby)
     }
     else {
-        return res.status(200).json({success:false,message:"Cannot add the Hobby! Probably required details not provided"})
+        return res.status(400).json({name:newHobby.name,message:newHobby.message})
     }
 }
 

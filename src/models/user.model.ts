@@ -11,7 +11,7 @@ const UserSchema = new Schema({
         default:[]
     }
 },
-{ versionKey: false })
+{ versionKey: false });
 
 const User:Model<IUser> = model<IUser>('user',UserSchema);
 
