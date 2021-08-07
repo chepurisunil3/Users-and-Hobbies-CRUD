@@ -1,4 +1,4 @@
-import IHobbies, { isIHobbies } from "../interfaces/ihobbies.interface";
+import IHobbies from "../interfaces/ihobbies.interface";
 import Hobbies from "../models/hobbies.model";
 import User from "../models/user.model";
 import mongoose from 'mongoose';

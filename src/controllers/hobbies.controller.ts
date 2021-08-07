@@ -1,6 +1,6 @@
 import {Request,Response,NextFunction} from "express";
 import { IError, isIError } from "../interfaces/ierror.interface";
-import IHobbies, { isIHobbies } from "../interfaces/ihobbies.interface";
+import IHobbies from "../interfaces/ihobbies.interface";
 import { addHobbyForUser, findAllHobbiesForUser, findHobbyWithId, removeHobby, updateHobby } from "../services/hobbies.service";
 
 export const getAllHobbiesForUser = async (req: Request,res: Response,next: NextFunction) => {

@@ -4,7 +4,7 @@ import cors from "cors";
 import mongoDBConnection from "./config/mongoconnection";
 import userRouter from "./routes/users.route";
 import hobbiesRouter from "./routes/hobbies.route";
-import {Request,Response,NextFunction} from "express";
+import {Request,Response} from "express";
 import swaggerUi from 'swagger-ui-express';
 import fs from "fs";
 const swaggerData: any = fs.readFileSync('src/config/swagger.json', 'utf8');

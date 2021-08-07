@@ -1,6 +1,6 @@
 import {Request,Response,NextFunction} from "express";
 import { IError, isIError } from "../interfaces/ierror.interface";
-import IUser, { isIUser } from "../interfaces/iuser.interface";
+import IUser from "../interfaces/iuser.interface";
 import { addUser, findAll, findUserWithId, removeUser, updateUser } from "../services/user.service";
 
 export const getAllUsers = async (req: Request,res: Response,next: NextFunction) => {
