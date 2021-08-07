@@ -17,7 +17,6 @@ mongoDBConnection();
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(__dirname));
 
 app.use('/users',userRouter)
 app.use('/hobbies',hobbiesRouter)
