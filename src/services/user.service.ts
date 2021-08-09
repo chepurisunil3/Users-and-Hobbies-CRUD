@@ -4,8 +4,16 @@ import mongoose from 'mongoose';
 import { IError } from "../interfaces/ierror.interface";
 
 export const findAll = async (): Promise<IUser[]> => {
-    const users:IUser[] = await User.find().select({hobbies:0});
-    return users;
+    try {
+        const users:IUser[] = await User.find().select({hobbies:0});
+        return users;
+    }
+    catch (e)
+    {
+        console.log(e)
+        return [];
+    }
+    
 }
 
 export const findUserWithId = async (id:string): Promise<IUser|null> => {
