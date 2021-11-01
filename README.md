@@ -6,4 +6,4 @@
 
 
 # MongoDB
-    The User Credentials will be expired in a week. Let me know if you need more than a week :-)
+    The User Credentials will be expired in a week.
